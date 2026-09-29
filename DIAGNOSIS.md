@@ -1,6 +1,12 @@
 # CI Failure Diagnosis
 
-The fork's GitHub Actions API reports `0 workflows` and `0 runs`, including after a new baseline commit was pushed, although `.github/workflows/ci.yml` is present on `main`. GitHub provides no remote step output in this state. The messages below are exact local reproductions, not quotations attributed to a GitHub Actions run.
+The baseline GitHub Actions run is [CI Pipeline run 36523452327](https://github.com/pauljoe2k/ci-fix-drill/actions/runs/36523452327). Its install job passed and its `Run tests` step failed. The assertion and lockfile messages below are exact local reproductions because the baseline workflow did not reach those checks.
+
+## Test job has no checkout
+
+- **Step name:** Run tests (test job)
+- **Exact error from the GitHub Actions log:** `npm error enoent Could not read package.json: Error: ENOENT: no such file or directory, open '/home/runner/work/ci-fix-drill/ci-fix-drill/package.json'`
+- **Cause:** The test job ran on a separate, fresh GitHub-hosted runner and had no `actions/checkout` step. npm therefore had no repository files or `package.json` to run. The install job's checkout and `node_modules` are not shared with another job.
 
 ## Discount assertion
 
