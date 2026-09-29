@@ -1,6 +1,6 @@
 # CI Failure Diagnosis
 
-The fork's Actions page showed no workflow runs after the initial branch ref was pushed, so the messages below are exact local reproductions of the current failures. The baseline Actions run will be added once it is available.
+The fork's GitHub Actions API reports `0 workflows` and `0 runs`, including after a new baseline commit was pushed, although `.github/workflows/ci.yml` is present on `main`. GitHub provides no remote step output in this state. The messages below are exact local reproductions, not quotations attributed to a GitHub Actions run.
 
 ## Discount assertion
 
